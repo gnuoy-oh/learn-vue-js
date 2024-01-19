@@ -1,6 +1,6 @@
 <!-- HTML -->
 <div id="app">
-  <!-- <app-header v-bind:프롭스이름="상위컴포넌트의 데이터이름"></app-header> -->
+  <!-- v-bind:프롭스이름=상위컴포넌트의 데이터이름 -->
   <app-header v-bind:title="appTitle"></app-header>
 </div>
 
@@ -15,9 +15,10 @@
     },
     components: {
       'app-header': {
-        template: '<h1>{{ title }}</h1>',
+        template: '<h1>받아온 것: {{title}}</h1>',
         props: ['title']
       }
-    },
+    }
+
   }).mount('#app');
 </script>
