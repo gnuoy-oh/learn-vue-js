@@ -1,10 +1,8 @@
-<!-- HTML -->
 <div id="app">
   <p>{{ count }}</p>
-  <button v-on:click="addCount">+</button>
+  <button type="button" @click="addCount">Click~</button>
 </div>
 
-<!-- JavaScript -->
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script>
   Vue.createApp({
@@ -13,10 +11,12 @@
         count: 0
       }
     },
+
     methods: {
       addCount() {
         this.count++;
       }
     }
-  }).mount('#app');
+
+  }).mount('#app')
 </script>

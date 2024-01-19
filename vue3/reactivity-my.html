@@ -1,0 +1,31 @@
+<div id="app"></div>
+
+<!-- Vue.js CDN -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+  let data = {
+    message: 108
+  }
+
+  function render(sth) {
+    //  DOM API HTMl 태그 정보를 접근할 수 있는 기능
+    let div = document.querySelector('#app');
+    div.innerHTML = sth;
+  }
+
+  // 데이터 객체에 대한 proxy를 건다. app의 내용이 바뀌면, data에도 같이 반영되는 것.
+  let app = new Proxy(data, {
+    get() {
+      console.log('값 접근')
+    },
+
+    // API 스팩(사용 규격)
+    // https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Proxy/Proxy/set
+    set(target, prop, newValue) {
+      console.log('값 갱신');
+      target[prop] = newValue;
+      render(newValue);
+    }
+  })
+
+</script>
