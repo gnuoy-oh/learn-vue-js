@@ -16,31 +16,55 @@
 
 <script>
 import axios from "axios";
+import { ref } from "vue";
 
 export default {
-  data() {
-    return {
-      username: "",
-      password: ""
-    };
-  },
-  methods: {
-    submitForm() {
-      // 상위 디렉티브에서 이벤트 제어를 할 수 있음 (@click.prevent="submitForm")
-      // event.preventDefault();
+  // Compositon API (맨 아래 선언한 기존 data,methods 와 동일한 의미이다.)
+  setup() {
+    // data와 정확하게 같은 의미이다.
+    const username = ref("");
+    const password = ref("");
 
-      const data = {
-        username: this.username,
-        password: this.password
-      };
-
+    //methods
+    const submitForm = () => {
       axios
-        .post("https://jsonplaceholder.typicode.com/users", data)
+        .post("https://jsonplaceholder.typicode.com/users", {
+          // .value 붙이는 이유: Composition API의 특징임
+          // ref 지정한 안의 value가 원하는 값이다.
+          username: username.value,
+          password: password.value
+        })
         .then(response => {
           console.log(response);
         });
-    }
+    };
+
+    return { username, password, submitForm };
   }
+
+  // data() {
+  //   return {
+  //     username: "",
+  //     password: ""
+  //   };
+  // },
+  // methods: {
+  //   submitForm() {
+  //     // 상위 디렉티브에서 이벤트 제어를 할 수 있음 (@click.prevent="submitForm")
+  //     // event.preventDefault();
+
+  //     const data = {
+  //       username: this.username,
+  //       password: this.password
+  //     };
+
+  //     axios
+  //       .post("https://jsonplaceholder.typicode.com/users", data)
+  //       .then(response => {
+  //         console.log(response);
+  //       });
+  //   }
+  // }
 };
 </script>
 
